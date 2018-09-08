@@ -23,7 +23,7 @@ export default function Watcher(vm, expOrFn, cb, options) {
 	}
 	this.value = this.lazy ? undefined : this.get()
 }
-
+/*获得getter的值并且重新进行依赖收集*/
 Watcher.prototype.get = function() {
 	// body...
 	pushTarget(this)
@@ -43,7 +43,7 @@ Watcher.prototype.addDep = function(dep) {
 		}
 	}
 }
-
+/*清理依赖收集*/
 Watcher.prototype.cleanupDeps = function() {
 	var i = this.deps.length
 	while (i--) {
@@ -61,11 +61,11 @@ Watcher.prototype.cleanupDeps = function() {
 	this.deps = this.newDeps
 	this.newDeps = []
 }
-
+//调度者接口，当依赖发生改变的时候进行回调
 Watcher.prototype.update = function() {
 	this.run()
 }
-
+//调度者工作接口，将被调度者回调
 Watcher.prototype.run = function() {
 	var value = this.get()
 	var oldValue = this.value
