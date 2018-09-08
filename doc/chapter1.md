@@ -1,5 +1,4 @@
 # 项目搭建
----
 
 ## Vue概述
 
@@ -120,6 +119,7 @@ package.json
 ## 起步
 
 正式编程前我们需要编写测试用例.
+
 test/options/options.spec.js
 ```javascript
 import Vue from "../src/instance/index";
@@ -137,6 +137,7 @@ describe('Proxy test', function() {
 ```
 
 编写测试用例后，开始编写真正的代码。首先编写初始化Vue实例的代码。
+
 src/instance/index.js
 ```javascript
 import { initMixin } from './init'
@@ -150,6 +151,7 @@ initMixin(Vue)
 export default Vue
 ```
 上面只是Vue的构造器调用了```this._init```方法初始化一个Vue的实例，下面是```initMixin```方法。
+
 src/instance/init.js
 ```javascript
 import { initState } from './state'
@@ -163,6 +165,7 @@ export function initMixin (Vue) {
 }
 ```
 initMixin方法只是在Vue的原型上定义了```_init```方法，并在其中调用了```initState```方法。
+
 src/instance/state.js
 ```javascript
 export function initState(vm) {
