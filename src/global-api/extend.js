@@ -10,12 +10,14 @@ export function initExtend(Vue) {
    	*/
    	Vue.cid = 0
   	let cid = 1
-
+  	//扩展基础构造器, 制造一个可复用且有指定选项功能的子构造器
   	Vue.extend = function (extendOptions){
     	extendOptions = extendOptions || {}
+    	//父类的构造器
 	    const Super = this
 	    const SuperId = Super.cid
 	    const cachedCtors = extendOptions._Ctor || (extendOptions._Ctor = {})
+	    //如果构造函数中已经存在了该id，则代表已extend，直接返回
 	    if (cachedCtors[SuperId]) {
 	      return cachedCtors[SuperId]
 	    }
