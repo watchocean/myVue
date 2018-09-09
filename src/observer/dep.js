@@ -29,6 +29,14 @@ Dep.prototype.notify = function() {
 
 Dep.target = null
 
+function remove (arr, item) {
+    if (arr.length) {
+        const index = arr.indexOf(item)
+        if (index > -1) {
+            return arr.splice(index, 1)
+    }
+}
+
 var targetStack = []
 //将watcher观察者实例赋给Dep.target，用以依赖收集。同时将该实例存入target栈中
 export function pushTarget(_target) {
@@ -41,3 +49,4 @@ export function pushTarget(_target) {
 export function popTarget() {
 	Dep.target = targetStack.pop()
 }
+
