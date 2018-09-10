@@ -4,7 +4,15 @@ import { createComponent } from "./create-component";
 import { isDef, isUndef, isTrue, isPrimitive, resolveAsset } from "../util/index";
 
 export function createElement(context, tag, data, children) {
-	let vnode, ns;
+	let vnode;
+	if (isDef(data) && isDef(data._ob_)) {
+		return createEmptyVNode
+	}
+
+	if (!tag) {
+		return createEmptyVNode
+	}
+
 	if (typeof tag === "string") {
 		let Ctor;
 		// 判断是否是一个保留标签
