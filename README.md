@@ -12,3 +12,5 @@
 [二、响应式](https://github.com/watchocean/myVue/blob/master/doc/chapter2.md)
 
 [三、Virtual DOM与VNode](https://github.com/watchocean/myVue/blob/master/doc/chapter3.md)
+
+[四、Virtual DOm与patch](https://github.com/watchocean/myVue/blob/master/doc/chapter4.md)
