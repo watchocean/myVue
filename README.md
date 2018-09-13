@@ -14,3 +14,12 @@
 [三、Virtual DOM与VNode](https://github.com/watchocean/myVue/blob/master/doc/chapter3.md)
 
 [四、Virtual DOm与patch](https://github.com/watchocean/myVue/blob/master/doc/chapter4.md)
+
+# 关于
+
+本项目处于持续更新期间，会不断进行迭代，如果有什么问题可以联系我，我会及时处理。
+
+联系方式：
+
+		QQ:826797592
+		Email:zhan572637307@Gmail.com
