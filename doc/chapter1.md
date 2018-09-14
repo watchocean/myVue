@@ -31,22 +31,22 @@ Vue.js是一套构建用户界面的渐进式框架。与其他重量级框架�
 ### 响应式
 
 之所以称为响应式，是因为Vue.js实现了数据和视图的双向绑定，即数据发生变化后视图也随之变化。
-其中Vue实现响应式的核心函数是Object.defineProperty,具体实现原理会在接下来的内容中进行详细讲解。
+其中Vue实现响应式的核心函数是Object.defineProperty,而且因为Object.defineProperty最低支持IE8,所以导致Vue只兼容到IE8。Vue使用Object.defineProperty来实现响应式的具体原理会在接下来的内容中进行详细讲解。
 
 ### 虚拟DOM
 
-虚拟DOM是真实DOM的抽象,Vue的主要操作先是在虚拟DOM上进行的,最后再映射到真实DOM上，其中的核心是diff算法.
+虚拟DOM是真实DOM的抽象,Vue的主要操作先是在虚拟DOM上进行的,最后再根据不同的平台来映射到真实DOM上，其中的核心是diff算法.
 
 ## 部署开发环境
 
-构建myVue项目的第一件事，便是在空文件夹下使用```npm init```命令初始化项目。
-在正式编写项目前，我们需要下载和配置第三方工具，其中包括模块构建工具和测试工具。
+本项目使用npm作为包管理器，因此构建myVue项目的第一件事，便是在空文件夹下使用```npm init```命令初始化项目。
+项目初始化之后,在正式编写项目前，我们海需要下载和配置第三方工具，其中包括模块构建工具和测试工具。
 
 ### 设置Rollup
 
 在该项目中我们使用Rollup作为打包工具。Rollup作为一款javascript打包工具，其支持ES2015语法，同时它也是Vue的打包工具。
 
-使用Rollup前，首先是使用```npm install rollup rollup-watch --save-dev```命令安装Rollup相关包，安装完成后在根目录下创建```rollup.config.js```文件进行一些基础配置。
+使用Rollup前，首先是使用```npm install rollup rollup-watch --save-dev```命令安装Rollup相关包，安装完成后在根目录下创建```rollup.config.js```文件并进行一些基础配置。关于Rollup的进一步使用，请自行前往官网。
 
 ```javascript
 export default {
@@ -59,9 +59,9 @@ export default {
 };
 ```
 
-### 设置测试工具Karma和jasmine
+### 配置测试工具Karma和jasmine
 
-同样，使用前需下载相关包并进行配置。
+本项目采用karma作为自动化测试工具，jasmine作为单元测试工具，同样要想使用这两个工具，使用前需下载相关包并进行配置。
 ```javascript
 npm install karma jasmine karma-jasmine karma-chrome-launcher buble --save-dev
 npm install karma-rollup-plugin karma-rollup-preprocessor rollup-plugin-buble --save-dev
@@ -91,6 +91,7 @@ module.exports = function(config) {
 ```
 
 ### 项目结构
+项目搭建好的结构如下。
 
 ```javascript
 - package.json
@@ -107,6 +108,7 @@ module.exports = function(config) {
 
 ### 配置启动命令
 
+项目搭建好后，要想启动项目，我们可以在npm的配置文件中进行配置。
 package.json
 ```javascript
 "scripts": {
@@ -118,7 +120,7 @@ package.json
 
 ## 起步
 
-正式编程前我们需要编写测试用例.
+要想编写出高质量的代码，正式编程前我们最好养成编写代码前先编写测试用例进行单元测试的好习惯，下面我们就开始编写测试用例吧。
 
 test/options/options.spec.js
 ```javascript
@@ -136,7 +138,9 @@ describe('Proxy test', function() {
 });
 ```
 
-编写测试用例后，开始编写真正的代码。首先编写初始化Vue实例的代码。
+编写测试用例后，我们的准备工作就全部完成了，我们就可以开始编写真正的代码了，此时是不是感到很激动。(毕竟特烦配置什么的了，特别是javaweb项目,想到当年被javaweb三大框架配置支配的恐惧就不禁内牛满面啊...)
+
+要想实现Vue，自然是先编写Vue的构造函数，然后再一步一步的实现其他功能。
 
 src/instance/index.js
 ```javascript
@@ -150,7 +154,7 @@ initMixin(Vue)
 
 export default Vue
 ```
-上面只是Vue的构造器调用了```this._init```方法初始化一个Vue的实例，下面是```initMixin```方法。
+上面只是Vue的构造器调用了```this._init```方法来初始化一个Vue的实例，而```initMixin``` 的作用便是给Vue定义原型方法，具体代码如下。
 
 src/instance/init.js
 ```javascript
@@ -164,7 +168,7 @@ export function initMixin (Vue) {
   }
 }
 ```
-initMixin方法只是在Vue的原型上定义了```_init```方法，并在其中调用了```initState```方法。
+initMixin方法只是在Vue的原型上定义了```_init```方法，而```_init```方法则是调用了```initState```方法来初始化data。
 
 src/instance/state.js
 ```javascript
