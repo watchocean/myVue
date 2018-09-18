@@ -5,7 +5,7 @@ import { mergeOptions } from '../util/index'
 //定义vue的原型初始方法
 export function initMixin(Vue) {
 	Vue.prototype._init = function(options) {
-		var vm = this
+		const vm = this
 		//vm.$options = options
 		vm.$options = mergeOptions(
       		resolveConstructorOptions(vm.constructor),
@@ -25,6 +25,6 @@ export function initMixin(Vue) {
 }
 
 export function resolveConstructorOptions(Ctor) {
-	let options = Ctor.options
+	const options = Ctor.options
 	return options
 }

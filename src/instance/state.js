@@ -10,12 +10,12 @@ export function initState(vm) {
 }
 //初始化data
 function initData(vm) {
-	var data = vm.$options.data
+	let data = vm.$options.data
 	data = vm._data = typeof data === 'function' ? getData(data, vm) : data || {}
 
 	//将data代理到vm实例
-	var keys = Object.keys(data)
-	var i = keys.length
+	const keys = Object.keys(data)
+	let i = keys.length
 	while(i--) {
 		proxy(vm, keys[i])
 	}

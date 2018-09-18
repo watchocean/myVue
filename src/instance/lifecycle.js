@@ -10,7 +10,7 @@ export function lifecycleMixin(Vue) {
 
 	}
   	Vue.prototype.$mount = function(el) {
-  		var vm = this
+  		const vm = this
     	vm._watcher = new Watcher(vm, function(){
       		console.log(vm.a, "update!!!")
     	}, noop)
