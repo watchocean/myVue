@@ -1,23 +1,23 @@
+import VNode from './vnode'
+import { isDef, isUndef, isTrue, makeMap, isPrimitive } from '../util/index'
+
 // createPatchFunction工厂函数是主体。由于Patch中的节点操作是跨平台的，所以需要动态创建
 // createPatchFunction接受一个backend参数。这个工厂函数里定义了大量的helper函数。关键是patch函数。所以要先看这个函数。
 // 然后依次实现patch函数调用的那些工具函数。
 // hydrating的情况先不考虑
-import VNode from './vnode'
-import { isDef, isUndef, isTrue, makeMap, isPrimitive } from '../util/index'
+export let emptyNode = new VNode('', {}, [])
 
-export var emptyNode = new VNode('', {}, [])
-
-var hooks = ['create', 'activate', 'update', 'remove', 'destroy'];
+const hooks = ['create', 'activate', 'update', 'remove', 'destroy'];
 //判断是否是同一节点，如果是则直接Patch
 function sameVnode(a, b) {
 	return (a.key === b.key && a.isComment === b.isComment && isDef(a.data) === isDef(b.data))
 }
 
 export function createPatchFunction(backend) {
-	var i,j
-	var cbs = {}
-	var nodeOps = backend.nodeOps
-	var modules = backend.modules
+	let i,j
+	let cbs = {}
+	let nodeOps = backend.nodeOps
+	let modules = backend.modules
 
 	//初始化cbs中hooks并添加module`s hook
 	for (i = 0; i < hooks.length; ++i) {
@@ -34,9 +34,9 @@ export function createPatchFunction(backend) {
 	}
 
 	function createElm(vnode, insertedVnodeQueue, parentElm, refElm) {
-		var data = vnode.data
-    	var children = vnode.children
-    	var tag = vnode.tag
+		let data = vnode.data
+    	let children = vnode.children
+    	let tag = vnode.tag
 
     	if (createComponent(vnode, insertedVnodeQueue, parentElm, refElm)) {
       		return
@@ -61,7 +61,7 @@ export function createPatchFunction(backend) {
 	}
 
 	function createComponent(vnode, insertedVnodeQueue, parentElm, refElm) {
-		var i = vnode.data
+		let i = vnode.data
 		if (isDef(i)) {
 			if (isDef(i = i.hook) && isDef(i = i.init)) {
 				i(vnode, parentElm, refElm)
@@ -94,15 +94,15 @@ export function createPatchFunction(backend) {
   	//新旧虚拟节点树进行比对，只对有差异的地方更新，以节省性能
   	//比较可以组合出四种情况，前后颠倒(2种)，中间往前移(1), 不存在的节点则重新创建(1)
   	function updateChildren(parentElm, oldCh, newCh, insertedVnodeQueue, removeOnly) {
-  		var oldStartIdx = 0
-	    var newStartIdx = 0
-	    var oldEndIdx = oldCh.length - 1
-	    var oldStartVnode = oldCh[0]
-	    var oldEndVnode = oldCh[oldEndIdx]
-	    var newEndIdx = newCh.length - 1
-	    var newStartVnode = newCh[0]
-	    var newEndVnode = newCh[newEndIdx]
-	    var oldKeyToIdx, idxInOld, vnodeToMove, refElm
+  		let oldStartIdx = 0
+	    let newStartIdx = 0
+	    let oldEndIdx = oldCh.length - 1
+	    let oldStartVnode = oldCh[0]
+	    let oldEndVnode = oldCh[oldEndIdx]
+	    let newEndIdx = newCh.length - 1
+	    let newStartVnode = newCh[0]
+	    let newEndVnode = newCh[newEndIdx]
+	    let oldKeyToIdx, idxInOld, vnodeToMove, refElm
 
 	    const canMove = !removeOnly
 

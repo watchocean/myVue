@@ -6,11 +6,11 @@ import { isDef, isUndef, isTrue, isPrimitive, resolveAsset } from "../util/index
 export function createElement(context, tag, data, children) {
 	let vnode;
 	if (isDef(data) && isDef(data._ob_)) {
-		return createEmptyVNode
+		return createEmptyVNode()
 	}
 
 	if (!tag) {
-		return createEmptyVNode
+		return createEmptyVNode()
 	}
 
 	if (typeof tag === "string") {
