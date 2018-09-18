@@ -1,4 +1,6 @@
-var uid = 0;
+import { remove } from "../util/index"
+
+let uid = 0;
 
 //dep构造函数
 export default function Dep(argument) {
@@ -29,15 +31,7 @@ Dep.prototype.notify = function() {
 
 Dep.target = null
 
-function remove (arr, item) {
-    if (arr.length) {
-        const index = arr.indexOf(item)
-        if (index > -1) {
-            return arr.splice(index, 1)
-    }
-}
-
-var targetStack = []
+let targetStack = []
 //将watcher观察者实例赋给Dep.target，用以依赖收集。同时将该实例存入target栈中
 export function pushTarget(_target) {
 	if (Dep.target) {
@@ -49,4 +43,3 @@ export function pushTarget(_target) {
 export function popTarget() {
 	Dep.target = targetStack.pop()
 }
-

@@ -34,7 +34,7 @@ Watcher.prototype.get = function() {
 };
 // 将依赖添加进依赖集， 将观察者添加进订阅列表
 Watcher.prototype.addDep = function(dep) {
-	var id = dep.id
+	let id = dep.id
 	if (!this.newDepIds.has(id)) {
 		this.newDepIds.add(id)
 		this.newDeps.push(dep)
@@ -45,7 +45,7 @@ Watcher.prototype.addDep = function(dep) {
 }
 /*清理依赖收集*/
 Watcher.prototype.cleanupDeps = function() {
-	var i = this.deps.length
+	let i = this.deps.length
 	while (i--) {
 		var dep = this.deps[i]
 		if (!this.newDepIds.has(dep.id)) {
@@ -53,7 +53,7 @@ Watcher.prototype.cleanupDeps = function() {
 		}
 	}
 
-	var tmp = this.depIds
+	let tmp = this.depIds
 	this.depIds = this.newDepIds
 	this.newDepIds = tmp
 	this.newDepIds.clear()
@@ -67,8 +67,8 @@ Watcher.prototype.update = function() {
 }
 //调度者工作接口，将被调度者回调
 Watcher.prototype.run = function() {
-	var value = this.get()
-	var oldValue = this.value
+	let value = this.get()
+	let oldValue = this.value
 	this.value = value
 	this.cb.call(this.vm, value, oldValue)
 }

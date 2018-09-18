@@ -2,7 +2,7 @@ import { def, hasOwn, isObject, hasProto} from '../util/index'
 import { arrayMethods } from './array'
 import Dep from "./dep"
 
-var arrayKeys = Object.getOwnPropertyNames(arrayMethods)
+const arrayKeys = Object.getOwnPropertyNames(arrayMethods)
 //每个被观察到对象被附加上观察者实例，一旦被添加，观察者将为目标对象加上getter\setter属性，进行依赖收集以及调度更新。
 export function Observer(value) {
 	this.value = value
@@ -12,7 +12,7 @@ export function Observer(value) {
 	if (Array.isArray(value)) {
 		//使用修改原生数组方法替换原生数组方法以实现监听数组数据变化
 		//如果浏览器支持__proto__属性，则直接覆盖数组原型方法，否则遍历重写数组方法
-		var augment = hasProto ? protoAugment : copyAugment
+		const augment = hasProto ? protoAugment : copyAugment
 			augment(value, arrayMethods, arrayKeys)
 		/*如果是数组则需要遍历数组的每一个成员进行observe*/
 		this.observeArray(value)
@@ -25,8 +25,8 @@ export function Observer(value) {
 }
 //遍历每一个对象并且在它们上面绑定getter与setter。这个方法只有在value的类型是对象的时候才能被调用
 Observer.prototype.walk = function(obj) {
-	var keys = Object.keys(obj)
-	for (var i = 0; i < keys.length; i++) {
+	const keys = Object.keys(obj)
+	for (let i = 0; i < keys.length; i++) {
 		defineReactive(obj, keys[i], obj[keys[i]])
 	}
 }
@@ -43,7 +43,7 @@ export function observe(value) {
 	if (!isObject(value)) {
 		return
 	}
-	var ob
+	let ob
 	//判断传入的对象是否是Observer, 不是则重新创建
 	if (hasOwn(value, '_ob_') && value._ob_ instanceof Observer) {
 		ob = value._ob_
@@ -54,13 +54,13 @@ export function observe(value) {
 }
 //双向绑定数据
 export function defineReactive(obj, key, val) {
-	var dep = new Dep()
-	var childOb = observe(val)
+	const dep = new Dep()
+	let childOb = observe(val)
 	Object.defineProperty(obj, key, {
 		enumerable: true,
 		configurable: true,
 		get: function reactiveGetter() {
-			var value = val
+			let value = val
 			if (Dep.target){
 				dep.depend()
 				if (childOb){
@@ -70,7 +70,7 @@ export function defineReactive(obj, key, val) {
 			return value
 		},
 		set: function reactiveSetter(newVal) {
-			var value = val
+			let value = val
 			if (newVal === value || (newVal !== newVal && value !== value)) {
 				return
 			}
@@ -115,7 +115,7 @@ function protoAugment (target, src) {
 
 function copyAugment (target, src, keys) {
 	for (let i = 0, l = keys.length; i < l; i++) {
-		var key = keys[i]
+		let key = keys[i]
 		def(target, key, src[key])
 	}
 }
