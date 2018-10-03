@@ -201,7 +201,7 @@ function proxy(vm, key) {
     })
 }
 ```
-如上```initState```方法只是调用了```initData```方法,而```initData```方法则是初始化了data并使用```proxy```方法将```vm._data.a```代理成```vm.a```。
+如上```initState```方法只是调用了```initData```方法,而```initData```方法则是初始化了data并使用```proxy```方法将```vm._data.a```代理成```vm.a```。代理后能够降低数据结构深度，从而减少数据存取时的性能消耗。
 
 ```proxy```在```vm```上使用同样的key定义了一个属性,并通过 get/set 从```vm._data```上获取data。
 
