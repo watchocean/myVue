@@ -26,7 +26,7 @@ export default function VNode(tag, data, children, text, elm, context, component
     this.isComment = false
 }
 ```
-这只是最基础的VNode节点，是派生其他Vnode的基类。相比于Vue.js中的Vnode类，本文去掉了许多暂时用不上的数据，用以减少干扰，以便更好的理解源码。
+这只是最基础的VNode节点，是派生其他Vnode的基类。相比于Vue.js中的Vnode类，本文去掉了许多暂时用不上的属性，用以减少干扰，以便更好的理解源码。
 
 tag: 当前节点的标签名。
 data: 当前节点对应的对象，包含了具体的一些数据信息，是一个VNodeData类型，可以参考VNodeData类型中的数据信息。
